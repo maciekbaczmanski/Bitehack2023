@@ -32,11 +32,11 @@ client.subscribe([("alarm", 0), ])
 
 class Telegram:
     def __init__(self,token):
-        print(token[:-1])
-        print("aa")
+        # print(token[:-1])
+        # print("aa")
         self.bot = telepot.Bot(token[:-1])
         self.permissions = [1255224844]
-        self.permissions = []
+        
         MessageLoop(self.bot, self.handle).run_as_thread()
 
     def msg_me(self, message):
@@ -45,6 +45,10 @@ class Telegram:
     def msg_all(self, message):
         for ID in self.permissions:
             self.bot.sendMessage(ID, message)
+    
+    def msg_id(self,message,id):
+        self.bot.sendMessage(id, message)
+
 
     def handle(self, msg):
         if msg['from']['id'] in self.permissions:
@@ -57,9 +61,12 @@ class Telegram:
                     self.bot.sendMessage(msg['from']['id'], 'User added!')
                 except:
                     self.bot.sendMessage(msg['from']['id'], 'Unknown error while adding user!')
+            elif '/alarm start' in msg['text']:
+                client.publish("alarm", "start", qos=0, retain=False)
+            elif '/alarm stop' in msg['text']:
+                client.publish("alarm", "stop", qos=0, retain=False)
             else:
-                self.msg_all(
-                    'Wrong message! If want to respond to last email, type:\nSPACE,BUILDING   (example: 05,9A)\nnone  <- for custom without space&building')
+                self.msg_id('Wrong message!',msg['from']['id'])
         else:
             self.bot.sendMessage(msg['from']['id'],
                                  'No permisions! Ask admin to add your ID.\nYour ID:\n' + str(msg['from']['id']))
