@@ -10,12 +10,12 @@ mode = 'manual'
 
 mem_values = {"ABS_X":128 , "ABS_BRAKE" : 0, "ABS_GAS": 0, "V":0, "M_L":0, "M_R":0}
 
-device = evdev.InputDevice('/dev/input/event4')
+device = evdev.InputDevice('/dev/input/event3')
 broker_address = "172.16.25.128"
 client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
-client.connect(broker_address, 1883)
+# client.connect(broker_address, 1883)
 print(device)
 while True:
     time.sleep(0.2)
