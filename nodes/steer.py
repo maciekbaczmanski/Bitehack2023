@@ -10,5 +10,6 @@ for event in device.read_loop():
     
     # print(evdev.ecodes.ABS[event.code])
     if event.type == evdev.ecodes.EV_ABS:
+
         print(evdev.categorize(event))
-        print(event.code, " : ",event.value)
+        print(evdev.ecodes.KEY[event.code], " : ",event.value)
