@@ -10,4 +10,4 @@ for event in device.read_loop():
     print(evdev.categorize(event))
     # print(evdev.ecodes.ABS[event.code])
 
-    print(event.type, " : ",event.value)
+    print(event.code, " : ",event.type, " : ",event.value)
