@@ -26,16 +26,18 @@ while True:
             # if event.type == evdev.ecodes.EV_KEY:
             if event.type == evdev.ecodes.EV_KEY:
                 # print("aaa")
-
-
-                print(evdev.ecodes.BTN[event.code])
+                if('BTN_X' in evdev.ecodes.BTN[event.code]):
+                    mode = 'manual'
+                if('BTN_B' in evdev.ecodes.BTN[event.code]):
+                    mode = 'auto'
+                # print(evdev.ecodes.BTN[event.code])
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
                 mem_values[evdev.ecodes.ABS[event.code]] = event.value
                 # print(evdev.categorize(event))
                 # print(evdev.ecodes.ABS[event.code], " : ",event.value)
     except Exception as e:
-        print(e)
+        # print(e)
         pass
     if(mem_values["ABS_BRAKE"] * mem_values["ABS_GAS"] == 0):
         mem_values["V"] = (mem_values["ABS_BRAKE"] - mem_values["ABS_GAS"])/255
@@ -50,8 +52,9 @@ while True:
     
     mem_values["M_L"] = int(motor_l * mem_values["V"])
     mem_values["M_R"] = int(motor_r * mem_values["V"])
+    print(mode)
     if mode == 'manual':
-        # print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
+        print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
         MQTT_MSG=json.dumps({"L": str(mem_values["M_L"]),"R": str(mem_values["M_R"])})
         # client.publish("steer/motors", MQTT_MSG, qos=0, retain=False)
 
