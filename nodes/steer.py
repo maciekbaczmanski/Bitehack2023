@@ -24,7 +24,7 @@ while True:
         for event in device.read():
             # print(evdev.categorize(event))
             # if event.type == evdev.ecodes.EV_KEY:
-            if ('BTN_X' in evdev.ecodes.BTN[event.code] or 'BTN_B' in evdev.ecodes.BTN[event.code]) and event.value:
+            if event.type == evdev.ecodes.EV_KEY and event.value:
                 # print("aaa")
                 # print(event.value)
                 if('BTN_X' in evdev.ecodes.BTN[event.code]):
@@ -32,7 +32,7 @@ while True:
                 if('BTN_B' in evdev.ecodes.BTN[event.code]):
                     mode = 'auto'
                 client.publish("steer/mode", mode, qos=0, retain=False)
-                time.sleep(1)
+                # time.sleep(1)
                 # print(evdev.ecodes.BTN[event.code])
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
