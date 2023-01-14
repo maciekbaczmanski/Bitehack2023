@@ -32,10 +32,10 @@ client.subscribe([("alarm", 0), ])
 
 class Telegram:
     def __init__(self,token):
-        print(token[:-2])
+        print(token[:-1])
         print("aa")
-        self.bot = telepot.Bot(token)
-        # self.permissions = [1255224844, 1990072643]
+        self.bot = telepot.Bot(token[:-1])
+        self.permissions = [1255224844]
         self.permissions = []
         MessageLoop(self.bot, self.handle).run_as_thread()
 
@@ -67,7 +67,7 @@ class Telegram:
 
 token=open("/home/pi/token.txt").read()
 bocik = Telegram(token)
-# bocik.msg_all('Service starting after system restart!\n For help type: /help')
+bocik.msg_all('Service starting after system restart!\n For help type: /help')
 
 while True:
     time.sleep(1)
