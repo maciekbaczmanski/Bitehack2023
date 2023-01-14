@@ -24,7 +24,7 @@ while True:
         for event in device.read():
             print(evdev.categorize(event))
             # if event.type == evdev.ecodes.EV_KEY:
-            if event.type == evdev.ecodes.EV_BTN:
+            if event.type == evdev.ecodes.EV_KEY:
                 print(evdev.ecodes.EV_KEY[event.code])
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
