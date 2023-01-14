@@ -15,7 +15,7 @@ broker_address = "172.16.25.128"
 client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
-# client.connect(broker_address, 1883)
+client.connect(broker_address, 1883)
 print(device)
 while True:
     time.sleep(0.2)
@@ -26,10 +26,13 @@ while True:
             # if event.type == evdev.ecodes.EV_KEY:
             if event.type == evdev.ecodes.EV_KEY:
                 # print("aaa")
+                
                 if('BTN_X' in evdev.ecodes.BTN[event.code]):
                     mode = 'manual'
                 if('BTN_B' in evdev.ecodes.BTN[event.code]):
                     mode = 'auto'
+                client.publish("steer/mode", mode, qos=0, retain=False)
+                time.sleep(1)
                 # print(evdev.ecodes.BTN[event.code])
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
@@ -56,7 +59,7 @@ while True:
     if mode == 'manual':
         print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
         MQTT_MSG=json.dumps({"L": str(mem_values["M_L"]),"R": str(mem_values["M_R"])})
-        # client.publish("steer/motors", MQTT_MSG, qos=0, retain=False)
+        client.publish("steer/motors", MQTT_MSG, qos=0, retain=False)
 
 
 
