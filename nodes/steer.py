@@ -24,7 +24,7 @@ while True:
         for event in device.read():
             # print(evdev.categorize(event))
             # if event.type == evdev.ecodes.EV_KEY:
-            if event.type == evdev.ecodes.EV_KEY and event.value:
+            if ('BTN_X' in evdev.ecodes.BTN[event.code] or 'BTN_B' in evdev.ecodes.BTN[event.code]) and event.value:
                 # print("aaa")
                 # print(event.value)
                 if('BTN_X' in evdev.ecodes.BTN[event.code]):
