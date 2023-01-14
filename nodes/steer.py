@@ -10,7 +10,7 @@ mem_values = {"ABS_X":128 , "ABS_BRAKE" : 0, "ABS_GAS": 0}
 device = evdev.InputDevice('/dev/input/event3')
 print(device)
 while True:
-    time.sleep(0.5)
+    time.sleep(0.1)
     print("-------------------------")
     try:
         for event in device.read():
