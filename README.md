@@ -6,7 +6,7 @@ Pat&amp;Mat team
 | --- | --- | --- | --- |
 | 0 | naped | ? | Kamil + Adrian |
 | 1 | zaplon | ? |  |
-| 2 | komunikacja | ? |  |
+| 2 | komunikacja | comm.local | Maciek |
 | 3 | wizja + ai + srvr | host.local | Krzysiek |
 | 4 | sterowanie | steer.local | Maciek |
 | 5 | gasnica | ? |  |
