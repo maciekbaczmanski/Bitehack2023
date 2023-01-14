@@ -23,7 +23,8 @@ while True:
     try:
         for event in device.read():
             # print(evdev.categorize(event))
-            print(evdev.ecodes)
+            # print(evdev.ecodes)
+            print(event.type,":",evdev.ecodes.EV_BTN)
             # if event.type == evdev.ecodes.EV_KEY:
             if event.type == evdev.ecodes.EV_BTN:
                 # print(evdev.ecodes.EV_BTN[event.code])
