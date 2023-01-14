@@ -21,5 +21,5 @@ while True:
                 print(mem_values)
                 # print(evdev.categorize(event))
                 # print(evdev.ecodes.ABS[event.code], " : ",event.value)
-    except Exception as e:
-        print(e)
+    except:
+        pass
