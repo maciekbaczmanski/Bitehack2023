@@ -26,7 +26,7 @@ while True:
             # if event.type == evdev.ecodes.EV_KEY:
             if event.type == evdev.ecodes.EV_KEY:
                 # print("aaa")
-                
+                print(event.value)
                 if('BTN_X' in evdev.ecodes.BTN[event.code]):
                     mode = 'manual'
                 if('BTN_B' in evdev.ecodes.BTN[event.code]):
