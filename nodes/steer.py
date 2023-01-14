@@ -11,6 +11,7 @@ device = evdev.InputDevice('/dev/input/event3')
 print(device)
 while True:
     time.sleep(1)
+    print("-------------------------")
     try:
         for event in device.read():
             # if event.type == evdev.ecodes.EV_KEY:
