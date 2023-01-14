@@ -61,9 +61,9 @@ class Telegram:
                     self.bot.sendMessage(msg['from']['id'], 'User added!')
                 except:
                     self.bot.sendMessage(msg['from']['id'], 'Unknown error while adding user!')
-            elif '/alarm start' in msg['text']:
+            elif '/alarm_start' in msg['text']:
                 client.publish("alarm", "start", qos=0, retain=False)
-            elif '/alarm stop' in msg['text']:
+            elif '/alarm_stop' in msg['text']:
                 client.publish("alarm", "stop", qos=0, retain=False)
             else:
                 self.msg_id('Wrong message!',msg['from']['id'])
