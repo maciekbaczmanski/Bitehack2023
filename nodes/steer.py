@@ -34,8 +34,8 @@ while True:
     elif normalize_x >0:
         motor_r -= abs(normalize_x)
     
-    mem_values["M_L"] = motor_l * mem_values["V"]
-    mem_values["M_R"] = motor_r * mem_values["V"]
+    mem_values["M_L"] = int(motor_l * mem_values["V"])
+    mem_values["M_R"] = int(motor_r * mem_values["V"])
     print(mem_values)
 
 
