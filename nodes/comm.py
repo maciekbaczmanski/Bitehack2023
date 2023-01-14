@@ -7,7 +7,7 @@ broker_address = "172.16.25.128"
 client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
-client.connect(broker_address, 1883)
+
 
 def on_message(client, userdata, message):
     global bedroom_delay, switch_off
@@ -18,6 +18,9 @@ def on_message(client, userdata, message):
         elif str(message.payload.decode("utf-8")) == "stop":
             mixer.music.stop()
 
+client.on_message = on_message
+client.connect(broker_address, 1883)
+client.loop_start()
 client.subscribe([("alarm", 0), ])
 
 
