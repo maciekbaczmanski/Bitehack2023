@@ -1,5 +1,7 @@
 import evdev
+import paho.mqtt.client as mqtt
 import time
+import json
 devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
 for device in devices:
     print(device.path, device.name, device.phys)
@@ -8,9 +10,14 @@ for device in devices:
 mem_values = {"ABS_X":128 , "ABS_BRAKE" : 0, "ABS_GAS": 0, "V":0, "M_L":0, "M_R":0}
 
 device = evdev.InputDevice('/dev/input/event3')
+broker_address = "172.16.25.128"
+client = mqtt.Client()
+# client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
+# client.on_message = on_message
+client.connect(broker_address, 1881)
 print(device)
 while True:
-    time.sleep(0.1)
+    time.sleep(0.2)
     print("-------------------------")
     try:
         for event in device.read():
@@ -37,6 +44,9 @@ while True:
     mem_values["M_L"] = int(motor_l * mem_values["V"])
     mem_values["M_R"] = int(motor_r * mem_values["V"])
     print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
+    MQTT_MSG=json.dumps({"L": str(mem_values["M_L"]),"R": str(mem_values["M_R"])})
+    client.publish("steer/motors", MQTT_MSG, qos=0, retain=False)
+
 
 
 
