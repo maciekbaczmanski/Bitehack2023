@@ -35,7 +35,7 @@ while True:
                 # print(evdev.categorize(event))
                 # print(evdev.ecodes.ABS[event.code], " : ",event.value)
     except Exception as e:
-        # print(e)
+        print(e)
         pass
     if(mem_values["ABS_BRAKE"] * mem_values["ABS_GAS"] == 0):
         mem_values["V"] = (mem_values["ABS_BRAKE"] - mem_values["ABS_GAS"])/255
