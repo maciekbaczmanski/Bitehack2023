@@ -5,7 +5,7 @@ for device in devices:
     print(device.path, device.name, device.phys)
 
 
-mem_values = {"ABS_X":128 , "ABS_BRAKE" : 0, "ABS_GAS": 0}
+mem_values = {"ABS_X":128 , "ABS_BRAKE" : 0, "ABS_GAS": 0, "V":0, "LR":0}
 
 device = evdev.InputDevice('/dev/input/event3')
 print(device)
@@ -23,4 +23,9 @@ while True:
                 # print(evdev.ecodes.ABS[event.code], " : ",event.value)
     except:
         pass
-    print(mem_values)
+    if(mem_values["ABS_BRAKE"] * mem_values["ABS_GAS"] == 0):
+        mem_values["V"] = ((mem_values["ABS_BRAKE"] - mem_values["ABS_GAS"])//255)*100
+    print("V: ",mem_values["V"])
+
+
+
