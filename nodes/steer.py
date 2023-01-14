@@ -14,7 +14,7 @@ broker_address = "172.16.25.128"
 client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
-client.connect(broker_address, 1881)
+client.connect(broker_address, 1883)
 print(device)
 while True:
     time.sleep(0.2)
