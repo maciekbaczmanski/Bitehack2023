@@ -33,7 +33,7 @@ while True:
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
                 mem_values[evdev.ecodes.ABS[event.code]] = event.value
                 # print(evdev.categorize(event))
-                # print(evdev.ecodes.ABS[event.code], " : ",event.value)
+                print(evdev.ecodes.ABS[event.code], " : ",event.value)
     except:
         pass
     if(mem_values["ABS_BRAKE"] * mem_values["ABS_GAS"] == 0):
