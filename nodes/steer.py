@@ -36,7 +36,7 @@ while True:
     
     mem_values["M_L"] = int(motor_l * mem_values["V"])
     mem_values["M_R"] = int(motor_r * mem_values["V"])
-    print(mem_values)
+    print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
 
 
 
