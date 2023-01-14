@@ -25,8 +25,9 @@ while True:
             print(evdev.categorize(event))
             # if event.type == evdev.ecodes.EV_KEY:
             if event.type == evdev.ecodes.EV_KEY:
-                print("aaa")
-                # print(evdev.ecodes.EV_KEY[event.code])
+                # print("aaa")
+
+                print(evdev.ecodes.EV_KEY[event.code])
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
                 mem_values[evdev.ecodes.ABS[event.code]] = event.value
