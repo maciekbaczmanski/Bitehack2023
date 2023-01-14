@@ -24,7 +24,7 @@ while True:
     except:
         pass
     if(mem_values["ABS_BRAKE"] * mem_values["ABS_GAS"] == 0):
-        mem_values["V"] = ((mem_values["ABS_BRAKE"] - mem_values["ABS_GAS"])//255)*100
+        mem_values["V"] = int(((mem_values["ABS_BRAKE"] - mem_values["ABS_GAS"])/255)*100)
     print("V: ",mem_values["V"])
 
 
