@@ -28,7 +28,7 @@ while True:
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
                 mem_values[evdev.ecodes.ABS[event.code]] = event.value
-                # print(evdev.categorize(event))
+                print(evdev.categorize(event))
                 # print(evdev.ecodes.ABS[event.code], " : ",event.value)
     except:
         pass
