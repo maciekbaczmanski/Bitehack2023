@@ -11,16 +11,18 @@ broker_address = "172.16.25.128"
 client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
-
+alarm = False
 
 def on_message(client, userdata, message):
-    global bedroom_delay, switch_off
+    global alarm
     if message.topic == "alarm":
         if str(message.payload.decode("utf-8")) == "start":
         # client.publish("test2", "ok", qos=0, retain=False)
             mixer.music.play(-1)
+            alarm = True
         elif str(message.payload.decode("utf-8")) == "stop":
             mixer.music.stop()
+            alarm = False
 
 client.on_message = on_message
 client.connect(broker_address, 1883)
@@ -77,4 +79,6 @@ bocik = Telegram(token)
 bocik.msg_all('Service starting after system restart!\n For help type: /help')
 
 while True:
+    if alarm:
+        bocik.msg_all('SOMEONE IS STEALING YOUR TACZKI\n')
     time.sleep(1)
