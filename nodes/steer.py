@@ -6,6 +6,7 @@ devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
 for device in devices:
     print(device.path, device.name, device.phys)
 
+mode = 'manual'
 
 mem_values = {"ABS_X":128 , "ABS_BRAKE" : 0, "ABS_GAS": 0, "V":0, "M_L":0, "M_R":0}
 
@@ -22,7 +23,8 @@ while True:
     try:
         for event in device.read():
             # if event.type == evdev.ecodes.EV_KEY:
-            
+            if event.type == evdev.ecodes.EV_KEY:
+                print(evdev.ecodes.EV_KEY[event.code])
             # print(evdev.ecodes.ABS[event.code])
             if event.type == evdev.ecodes.EV_ABS and evdev.ecodes.ABS[event.code] in mem_values.keys():
                 mem_values[evdev.ecodes.ABS[event.code]] = event.value
@@ -43,9 +45,10 @@ while True:
     
     mem_values["M_L"] = int(motor_l * mem_values["V"])
     mem_values["M_R"] = int(motor_r * mem_values["V"])
-    print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
-    MQTT_MSG=json.dumps({"L": str(mem_values["M_L"]),"R": str(mem_values["M_R"])})
-    client.publish("steer/motors", MQTT_MSG, qos=0, retain=False)
+    if mode == 'manual':
+        # print("LEFT: ",mem_values["M_L"]," RIGHT: ",mem_values["M_R"])
+        MQTT_MSG=json.dumps({"L": str(mem_values["M_L"]),"R": str(mem_values["M_R"])})
+        # client.publish("steer/motors", MQTT_MSG, qos=0, retain=False)
 
 
 
