@@ -80,5 +80,5 @@ bocik.msg_all('Service starting after system restart!\n For help type: /help')
 
 while True:
     if alarm:
-        bocik.msg_all('SOMEONE IS STEALING YOUR TACZKI\n')
-    time.sleep(1)
+        bocik.msg_all('SOMEONE IS STEALING YOUR TACZKI\n/alarm_stop to disable\n')
+    time.sleep(5)
