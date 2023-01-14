@@ -33,6 +33,7 @@ client.subscribe([("alarm", 0), ])
 class Telegram:
     def __init__(self,token):
         print(token)
+        print("aa")
         self.bot = telepot.Bot(token)
         # self.permissions = [1255224844, 1990072643]
         self.permissions = []
