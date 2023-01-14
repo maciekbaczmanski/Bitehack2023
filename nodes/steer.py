@@ -24,7 +24,7 @@ while True:
         for event in device.read():
             print(evdev.categorize(event))
             # if event.type == evdev.ecodes.EV_KEY:
-            if event.c == evdev.ecodes.EV_KEY:
+            if event.type == evdev.ecodes.EV_KEY:
                 print("aaa")
                 # print(evdev.ecodes.EV_KEY[event.code])
             # print(evdev.ecodes.ABS[event.code])
@@ -33,7 +33,8 @@ while True:
                 # print(evdev.categorize(event))
                 # print(evdev.ecodes.ABS[event.code], " : ",event.value)
     except Exception as e:
-        print(e)
+        # print(e)
+        pass
     if(mem_values["ABS_BRAKE"] * mem_values["ABS_GAS"] == 0):
         mem_values["V"] = (mem_values["ABS_BRAKE"] - mem_values["ABS_GAS"])/255
     # print("V: ",mem_values["V"])
