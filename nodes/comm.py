@@ -94,10 +94,13 @@ token=open("/home/pi/token.txt").read()
 bocik = Telegram(token)
 bocik.msg_all('Service starting after system restart!\n For help type: /help')
 last_alarm = alarm
+alarm_mess = False
 while True:
     if alarm:
-        bocik.msg_all('SOMEONE IS STEALING YOUR TACZKI\n/alarm_stop to disable\n')
-        alarm = False
+        if not alarm_mess:
+            bocik.msg_all('SOMEONE IS STEALING YOUR TACZKI\n/alarm_stop to disable\n')
+            alarm_mess = True
+        # alarm = False
         if led:
             GPIO.output(21, GPIO.LOW)
         else:
@@ -106,5 +109,6 @@ while True:
     if last_alarm and not alarm:
         GPIO.output(21, GPIO.HIGH)
         led = True
+        alarm_mess = False
     time.sleep(1)
     last_alarm = alarm
