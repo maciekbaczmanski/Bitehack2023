@@ -3,6 +3,11 @@ import paho.mqtt.client as mqtt
 import time
 import telepot
 from telepot.loop import MessageLoop
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(21, GPIO.OUT)
 
 
 mixer.init()
@@ -12,6 +17,7 @@ client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
 alarm = False
+led = False
 
 def on_message(client, userdata, message):
     global alarm
@@ -86,9 +92,18 @@ class Telegram:
 token=open("/home/pi/token.txt").read()
 bocik = Telegram(token)
 bocik.msg_all('Service starting after system restart!\n For help type: /help')
-
+last_alarm = alarm
 while True:
     if alarm:
         bocik.msg_all('SOMEONE IS STEALING YOUR TACZKI\n/alarm_stop to disable\n')
         alarm = False
+        if led:
+            GPIO.output(21, GPIO.LOW)
+        else:
+            GPIO.output(21, GPIO.HIGH)
+        led = not led
+    if last_alarm and not alarm:
+        GPIO.output(21, GPIO.HIGH)
+        led = True
     time.sleep(1)
+    last_alarm = alarm
