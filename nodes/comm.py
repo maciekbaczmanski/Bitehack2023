@@ -68,7 +68,7 @@ class Telegram:
                 client.publish("alarm", "start", qos=0, retain=False)
             elif '/alarm_stop' in msg['text']:
                 client.publish("alarm", "stop", qos=0, retain=False)
-            elif '/add_id' in msg['text']:
+            elif '/id_add' in msg['text']:
                 if add_user:
                     client.publish("add_card", "stop", qos=0, retain=False)
                     self.msg_id('Disabled adding ID\'s.',msg['from']['id'])
