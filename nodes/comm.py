@@ -74,7 +74,8 @@ class Telegram:
                     self.msg_id('Disabled adding ID\'s.',msg['from']['id'])
                 else:
                     client.publish("add_card", "start", qos=0, retain=False)
-                    self.msg_id('Enabled adding ID\'s.\nUse /add_id to disable adding ID\'s.',msg['from']['id'])
+                    self.msg_id('Enabled adding ID\'s.\nUse /id_add to disable adding ID\'s.',msg['from']['id'])
+                add_user = not add_user
             else:
                 self.msg_id('Wrong message!',msg['from']['id'])
         else:
