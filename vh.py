@@ -32,8 +32,12 @@ class VideoCapture(Thread):
             ret, jpeg = cv2.imencode('.jpg', frame)
             return jpeg.tobytes()
         except:
-            ret, jpeg = cv2.imencode('.jpg', dummy)
-            return jpeg.tobytes()
+            try:
+                ret, jpeg = cv2.imencode('.jpg', dummy)
+                return jpeg.tobytes()
+            except:
+                ret, jpeg = cv2.imencode('.jpg', frame)
+                return jpeg.tobytes()
 
     def update_frame(self):
         # extracting frames
@@ -197,7 +201,7 @@ def handle_mqtt_message(client, userdata, message):
         elif content == "auto":
             ppur_t.autoc = True
 
-    print(topic, content)
+    # print(topic, content)
 
 
 ## STREAM
