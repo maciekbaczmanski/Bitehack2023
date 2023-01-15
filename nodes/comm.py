@@ -110,5 +110,5 @@ while True:
         GPIO.output(21, GPIO.HIGH)
         led = True
         alarm_mess = False
-    time.sleep(1)
+    time.sleep(0.5)
     last_alarm = alarm
