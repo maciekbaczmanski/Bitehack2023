@@ -12,6 +12,7 @@ client = mqtt.Client()
 # client.username_pw_set("Raspberry_Pi", "Rpi_Raspberry_Python")
 # client.on_message = on_message
 alarm = False
+add_user = False
 
 def on_message(client, userdata, message):
     global alarm
@@ -67,6 +68,13 @@ class Telegram:
                 client.publish("alarm", "start", qos=0, retain=False)
             elif '/alarm_stop' in msg['text']:
                 client.publish("alarm", "stop", qos=0, retain=False)
+            elif '/add_id' in msg['text']:
+                if add_user:
+                    client.publish("add_card", "stop", qos=0, retain=False)
+                    self.msg_id('Disabled adding ID\'s.',msg['from']['id'])
+                else:
+                    client.publish("add_card", "start", qos=0, retain=False)
+                    self.msg_id('Enabled adding ID\'s.\nUse /add_id to disable adding ID\'s.',msg['from']['id'])
             else:
                 self.msg_id('Wrong message!',msg['from']['id'])
         else:
